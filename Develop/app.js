@@ -82,13 +82,13 @@ async function init() {
     try {
         // ask employee questions first
         await inquirer.prompt(employeeQuestions).then(function (response) {
-            return teamData = response;
+            return employeeData = response;
         });
 
 // filter out the role response here
 switch (employeeData.role) {
         case "Manager":
-            await inquirer.prompt(managerQuestion).then(function (response) {
+            await inquirer.prompt(managerQuestions).then(function (response) {
                 employeeData.officeNumber = response.officeNumber;
             });
 
@@ -97,7 +97,7 @@ switch (employeeData.role) {
             break;
 
         case "Engineer":
-            await inquirer.prompt(engineerQuestion).then(function (response) {
+            await inquirer.prompt(engineerQuestions).then(function (response) {
                 employeeData.github = response.githubUserName;
             });
 
@@ -106,7 +106,7 @@ switch (employeeData.role) {
             break;
 
         case "Intern":
-            await inquirer.prompt(internQuestion).then(function (response) {
+            await inquirer.prompt(internQuestions).then(function (response) {
                 employeeData.school = response.schoolName;
             });
 
@@ -129,7 +129,7 @@ await inquirer.prompt(addAnother).then(function(response){
 
 // if decision above is "yes" run the async function again
 if(decision === "Yes"){
-    await userData();
+    await init();
 } else {
     let allEmployees = render(employeeArray);
 
