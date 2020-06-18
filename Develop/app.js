@@ -130,13 +130,12 @@ await inquirer.prompt(addAnother).then(function(response){
 // if decision above is "yes" run the async function again
 if(decision === "Yes"){
     await init();
-} else {
-    let allEmployees = render(employeeArray);
-
-    
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
+} else {
+    let allEmployees = render(employeeArray);
+
 
 fs.writeFile(outputPath, allEmployees, function(err){
     if(err){
